@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using BaseStarter.Environment;
+using BaseStarter.DAL;
 
 namespace BaseStarter.Models
 {
@@ -28,10 +29,16 @@ namespace BaseStarter.Models
         #region "Properties"
 
        
+        /// <summary>
+        /// First name
+        /// </summary>
         [MaxLength(MaxLenghtDefaultString)]
         [Display(Name = "First name")]
         public string FirstName { get; set; }
 
+        /// <summary>
+        /// Last name
+        /// </summary>
         [MaxLength(MaxLenghtDefaultString)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
@@ -45,14 +52,14 @@ namespace BaseStarter.Models
         /// Validation before object Save
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<ValidationResult> Validate(GlobalEnvironment globalEnvironment)
+        public override IEnumerable<ValidationMessage> Validate(GlobalEnvironment globalEnvironment)
         {
-            List<ValidationResult> result = new List<ValidationResult>();
+            List<ValidationMessage> result = new List<ValidationMessage>();
 
             //Example condition
             if (FirstName.Length < 2)
             {
-                result.Add(new ValidationResult("Minimal length of last name is 2 character."));
+                result.Add(new ValidationMessage("Minimal length of last name is 2 character."));
             }
 
             return result;
@@ -62,9 +69,9 @@ namespace BaseStarter.Models
         /// Validation before Delete
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<ValidationResult> CanDelete(GlobalEnvironment globalEnvironment)
+        public override IEnumerable<ValidationMessage> CanDelete(GlobalEnvironment globalEnvironment)
         {
-            List<ValidationResult> result = new List<ValidationResult>();
+            List<ValidationMessage> result = new List<ValidationMessage>();
 
 
 

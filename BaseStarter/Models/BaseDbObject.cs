@@ -1,4 +1,5 @@
-﻿using BaseStarter.Environment;
+﻿using BaseStarter.DAL;
+using BaseStarter.Environment;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -41,9 +42,9 @@ namespace BaseStarter.Models
         /// </summary>
         /// <param name="globalEnvironment"></param>
         /// <returns></returns>
-        public virtual IEnumerable<ValidationResult> Validate(GlobalEnvironment globalEnvironment)
+        public virtual IEnumerable<ValidationMessage> Validate(GlobalEnvironment globalEnvironment)
         {
-            IEnumerable<ValidationResult> result = new List<ValidationResult>();
+            IEnumerable<ValidationMessage> result = new List<ValidationMessage>();
             return result;
         }
 
@@ -52,9 +53,9 @@ namespace BaseStarter.Models
         /// </summary>
         /// <param name="globalEnvironment"></param>
         /// <returns></returns>
-        public virtual IEnumerable<ValidationResult> CanDelete(GlobalEnvironment globalEnvironment)
+        public virtual IEnumerable<ValidationMessage> CanDelete(GlobalEnvironment globalEnvironment)
         {
-            IEnumerable<ValidationResult> result = new List<ValidationResult>();
+            IEnumerable<ValidationMessage> result = new List<ValidationMessage>();
             return result;
         }
 

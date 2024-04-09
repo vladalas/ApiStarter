@@ -1,0 +1,3 @@
+The project serves as a default (sample) project when creating a server REST API interface for providing functionality to client applications.
+The project has a sample object Client and the API interface provides functions for List, Detail and Save.
+The project is written in .NET Core 8 and uses the Entity Framework for storing objects in the database. It provides a "background" when saving, i.e. all objects are validated before being saved or deleted and the "BeforeSave" / "BeforeDelete" methods are called on them. A list of objects provides the "background" for filtering, sorting and paging.

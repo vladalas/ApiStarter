@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BaseStarter.DataViews;
 using BaseStarter.Models;
 
 namespace BaseStarter
@@ -11,7 +12,8 @@ namespace BaseStarter
     {
         public MappingProfile()
         {
-           // CreateMap<Client, ClientDVRow>();
+            CreateMap<Client, Client>();
+            CreateMap<Client, ClientDVRow>();
             
         }
     }
