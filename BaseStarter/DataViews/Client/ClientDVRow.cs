@@ -13,8 +13,14 @@ namespace BaseStarter.DataViews
     public class ClientDVRow : BaseDVRow
     {
 
+        /// <summary>
+        /// First Name
+        /// </summary>
         public required string FirstName { get; set; }
 
+        /// <summary>
+        /// Last Name
+        /// </summary>
         public required string LastName { get; set; }
 
     }

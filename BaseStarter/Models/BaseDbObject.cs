@@ -17,22 +17,44 @@ namespace BaseStarter.Models
     /// </summary>
     public abstract class BaseDbObject
     {
+        /// <summary>
+        /// Default length of string property
+        /// </summary>
         public const int MaxLenghtDefaultString = 256;
+        
+        /// <summary>
+        /// Length of string property storing Url
+        /// </summary>
         public const int MaxLenghtUrlString = 2000;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public BaseDbObject()
         {
 
         }
 
+        /// <summary>
+        /// Object Identifier
+        /// </summary>
         public int Id { get; set; }
 
+        /// <summary>
+        /// DateOfCreation
+        /// </summary>
         [Display(Name = "Datum of creation")]
         public DateTime DateOfCreation { get; private set; }
 
+        /// <summary>
+        /// DateOfUpdate
+        /// </summary>
         [Display(Name = "Datum of last update")]
         public DateTime DateOfUpdate { get; private set; }
 
+        /// <summary>
+        /// Property need to check if nobody change object in databaze
+        /// </summary>
         [Timestamp]
         public byte[]? ConcurrencyCheck { get; set; }
 

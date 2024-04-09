@@ -11,8 +11,14 @@ namespace BaseStarter.DataViews
     /// </summary>
     public class DataViewRequest
     {
-        public const int DefaultPageSize = 20;
+        /// <summary>
+        /// Default number of items in one page
+        /// </summary>
+        private const int DefaultPageSize = 20;
 
+        /// <summary>
+        /// 
+        /// </summary>
         public DataViewRequest()
         {
             PageSize = DefaultPageSize;
@@ -21,11 +27,24 @@ namespace BaseStarter.DataViews
             SortAsc = true;
         }
 
+        /// <summary>
+        /// Sort name
+        /// </summary>
         public string? SortName { get; set; }
+        
+        /// <summary>
+        /// Sort ascendent (true), descendent (false)
+        /// </summary>
         public bool SortAsc { get; set; }
 
-
+        /// <summary>
+        /// Page number (first page = 1)
+        /// </summary>
         public int PageIndex { get; set; }
+        
+        /// <summary>
+        /// Number of items in one page
+        /// </summary>
         public int PageSize { get; set; }
     }
 }

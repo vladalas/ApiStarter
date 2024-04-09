@@ -14,7 +14,8 @@ namespace BaseStarter.DAL
         public void Configure(EntityTypeBuilder<Client> entity)
         {
             entity.ToTable("Client");
-            entity.Property(x => x.DateOfCreation).HasDefaultValueSql("getdate()");
+            entity.Property(x => x.DateOfCreation).HasDefaultValueSql("date('now')");
+            //entity.Property(x => x.DateOfCreation).HasDefaultValueSql("getdate()"); //Line for MS SQL
         }
     }
 }
