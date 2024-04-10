@@ -15,13 +15,13 @@ namespace ApiStarter.Migrations
                 name: "Client",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: false),
-                    DateOfCreation = table.Column<DateTime>(type: "TEXT", nullable: false, defaultValueSql: "getdate()"),
-                    DateOfUpdate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ConcurrencyCheck = table.Column<byte[]>(type: "BLOB", rowVersion: true, nullable: true)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    FirstName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    DateOfCreation = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "getdate()"),
+                    DateOfUpdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ConcurrencyCheck = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
                 {

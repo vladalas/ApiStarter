@@ -14,8 +14,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+//builder.Services.AddDbContext<StarterDbContext>(options =>
+//options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("ApiStarter")));
 builder.Services.AddDbContext<StarterDbContext>(options =>
-                options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("ApiStarter")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("ApiStarter")));
 
 // Add AutoMapper
 var mapperConfig = new MapperConfiguration(mc =>
