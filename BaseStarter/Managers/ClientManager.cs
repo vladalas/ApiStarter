@@ -70,12 +70,15 @@ namespace BaseStarter.Managers
             }
             else //Update
             {
-                Client? t = await globalEnvironment.DbContext.Clients.FirstOrDefaultAsync(t => t.Id == client.Id);
-                if (t == null)
+                Client? cl = await globalEnvironment.DbContext.Clients.FirstOrDefaultAsync(t => t.Id == client.Id);
+                if (cl == null)
                 {
                     throw new NotFoundException();
                 }
-                _client = t;
+
+                cl.CheckConcurrencyCheckWithValue(client.ConcurrencyCheck);
+
+                _client = cl;
                 globalEnvironment.Mapper.Map(client, _client);
             }
 

@@ -54,6 +54,7 @@ namespace BaseStarter.Models
 
         /// <summary>
         /// Property need to check if nobody change object in databaze
+        /// Empty when inserting object
         /// </summary>
         [Timestamp]
         public byte[]? ConcurrencyCheck { get; set; }
@@ -113,13 +114,19 @@ namespace BaseStarter.Models
         /// </summary>
         /// <param name="newValue"></param>
         /// <returns></returns>
-        public void CheckConcurrencyCheckWithValue(byte[] newValue)
+        public void CheckConcurrencyCheckWithValue(byte[]? newValue)
         {
             if (ConcurrencyCheck != null)
             {
-                if (!ConcurrencyCheck.SequenceEqual(newValue))
+                if (newValue != null)
                 {
-                    throw new DbUpdateConcurrencyException("Object was edited by someone else.");
+                    if (!ConcurrencyCheck.SequenceEqual(newValue))
+                    {
+                        throw new DbUpdateConcurrencyException("Object was edited by someone else.");
+                    }
+                } else
+                {
+                        throw new DbUpdateConcurrencyException("Bad value for Concurrency check.");
                 }
             }
         }
