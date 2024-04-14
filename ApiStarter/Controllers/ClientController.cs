@@ -6,6 +6,7 @@ using BaseStarter.Filters;
 using BaseStarter.Managers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ApiStarter.Controllers
 {
@@ -17,6 +18,10 @@ namespace ApiStarter.Controllers
     public class ClientController : BaseController
     {
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="webEnvironment"></param>
         public ClientController(WebEnvironment webEnvironment) : base(webEnvironment)
         {
 
@@ -84,6 +89,7 @@ namespace ApiStarter.Controllers
         /// <response code="200">Client successfully Save, return Id</response>
         /// <response code="400">Problem with validation</response>
         /// <response code="404">Objekt with Id not found</response>
+        /// <response code="409">Object was edited by someone else</response>
         /// <response code="500">Internal error</response>
         [HttpPost]
         [Route("Save")]
@@ -105,6 +111,10 @@ namespace ApiStarter.Controllers
             catch (NotFoundException)
             {
                 return NotFound();
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                return Conflict(ex.Message);
             }
             catch (Exception ex)
             {
