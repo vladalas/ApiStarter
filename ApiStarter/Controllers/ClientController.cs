@@ -4,7 +4,7 @@ using BaseStarter.DAL;
 using BaseStarter.DataViews;
 using BaseStarter.Filters;
 using BaseStarter.Managers;
-using BaseStarter.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ApiStarter.Controllers
@@ -55,7 +55,7 @@ namespace ApiStarter.Controllers
         /// <response code="404">Not found</response>
         /// <response code="500">Internal error</response>
         [HttpGet("{id}")]
-        public async Task<ActionResult<Client>> Get(int id)
+        public async Task<ActionResult<BaseStarter.DTO.Client>> Get(int id)
         {
             try
             {
@@ -64,7 +64,9 @@ namespace ApiStarter.Controllers
                 {
                     return NotFound();
                 }
-                return Ok(client);
+                BaseStarter.DTO.Client clientResult = new();
+                WebEnvironment.GlobalEnvironment.Mapper.Map(client, clientResult);
+                return Ok(clientResult);
             }
             catch (Exception ex)
             {
@@ -77,7 +79,7 @@ namespace ApiStarter.Controllers
         /// Insert or Update Client
         /// (Id = 0 - insert, Id > 0 - update)
         /// </summary>
-        /// <param name="trip"></param>
+        /// <param name="client"></param>
         /// <returns></returns>
         /// <response code="200">Client successfully Save, return Id</response>
         /// <response code="400">Problem with validation</response>
@@ -85,11 +87,13 @@ namespace ApiStarter.Controllers
         /// <response code="500">Internal error</response>
         [HttpPost]
         [Route("Save")]
-        public async Task<ActionResult<SaveResultWithValidation>> Save(Client client)
+        public async Task<ActionResult<SaveResultWithValidation>> Save(BaseStarter.DTO.Client client)
         {
             try
             {
-                var res = await ClientManager.SaveAsync(WebEnvironment.GlobalEnvironment, client);
+                BaseStarter.Models.Client cln = new();
+                WebEnvironment.GlobalEnvironment.Mapper.Map(client, cln);
+                var res = await ClientManager.SaveAsync(WebEnvironment.GlobalEnvironment, cln);
 
                 if (res.Success == false)
                 {

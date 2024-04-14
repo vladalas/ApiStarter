@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using BaseStarter.DataViews;
-using BaseStarter.Models;
+
 
 namespace BaseStarter
 {
@@ -12,8 +12,10 @@ namespace BaseStarter
     {
         public MappingProfile()
         {
-            CreateMap<Client, Client>();
-            CreateMap<Client, ClientDVRow>();
+            CreateMap<Models.Client, Models.Client>();
+            CreateMap<Models.Client, DTO.Client>();
+            CreateMap<DTO.Client, Models.Client>();
+            CreateMap<Models.Client, ClientDVRow>();
             
         }
     }
